@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>one thing i need to tell you</title>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,.75), transparent 28%),
+      radial-gradient(circle at 85% 80%, rgba(255,220,230,.55), transparent 30%),
+      #f6eee8;
+    color: #302827;
+  }
+
+  .browser {
+    width: min(960px, calc(100% - 24px));
+    margin: 28px auto;
+    border: 1px solid #d8c9c3;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,.72);
+    box-shadow: 0 24px 70px rgba(77, 49, 43, .16);
+    backdrop-filter: blur(12px);
+  }
+
+  .topbar {
+    padding: 13px 16px;
+    background: #eee4df;
+    border-bottom: 1px solid #d8c9c3;
+  }
+
+  .dots { display:flex; gap:7px; margin-bottom: 11px; }
+  .dot { width:12px; height:12px; border-radius:50%; background:#cdbdb6; }
+  .address {
+    height: 36px;
+    display:flex;
+    align-items:center;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.75);
+    color:#8c7a74;
+    font: 13px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  main { padding: 58px 8vw 70px; }
+
+  .hero {
+    max-width: 720px;
+    margin: auto;
+    text-align:center;
+  }
+
+  .eyebrow {
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+    color:#9d746e;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 8vw, 76px);
+    line-height: .98;
+    font-weight: 400;
+    margin: 0 0 20px;
+  }
+
+  .sub {
+    color:#75635e;
+    font-size: 17px;
+    line-height:1.7;
+    margin: 0 auto 34px;
+    max-width: 560px;
+  }
+
+  button {
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 22px;
+    background:#302827;
+    color:#fff;
+    font: 600 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    cursor:pointer;
+    box-shadow: 0 8px 22px rgba(48,40,39,.18);
+    transition:.2s ease;
+  }
+  button:hover { transform: translateY(-2px); }
+
+  .letter {
+    max-width: 760px;
+    margin: 55px auto 0;
+    background:#fffdf9;
+    border:1px solid #eaded8;
+    border-radius: 5px;
+    padding: clamp(28px, 6vw, 58px);
+    box-shadow: 0 18px 45px rgba(91,63,55,.10);
+    position:relative;
+  }
+
+  .letter:before {
+    content:"";
+    position:absolute;
+    inset: 11px;
+    border:1px solid #efe4de;
+    pointer-events:none;
+  }
+
+  .content { position:relative; z-index:1; }
+
+  .salutation {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.9;
+    margin: 0 0 22px;
+  }
+
+  .highlight {
+    margin: 36px 0;
+    padding: 28px 22px;
+    text-align:center;
+    border-top:1px solid #e7d9d3;
+    border-bottom:1px solid #e7d9d3;
+  }
+
+  .highlight strong {
+    display:block;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight:400;
+    font-style:italic;
+    color:#8d4e58;
+    margin-bottom:8px;
+  }
+
+  .highlight span {
+    color:#8f7b74;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  .ending {
+    text-align:center;
+    margin-top:42px;
+    padding-top:32px;
+    border-top:1px solid #eaded8;
+  }
+
+  .heart {
+    display:inline-block;
+    font-size:28px;
+    margin-bottom:10px;
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { transform:scale(1); }
+    50% { transform:scale(1.12); }
+  }
+
+  .note {
+    color:#8a7771;
+    font-size:13px;
+    margin-top:24px;
+    text-align:center;
+  }
+
+  #letter { display:none; }
+  #letter.show { display:block; animation: rise .8s ease both; }
+
+  @keyframes rise {
+    from { opacity:0; transform:translateY(24px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .footer {
+    text-align:center;
+    padding: 0 20px 28px;
+    color:#9a8983;
+    font: 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  @media (max-width: 600px) {
+    .browser { margin: 10px auto; width: calc(100% - 12px); border-radius: 13px; }
+    main { padding: 45px 18px 50px; }
+    p { font-size:16px; line-height:1.85; }
+    .letter { padding: 30px 22px; }
+    .letter:before { inset:7px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="browser">
+  <div class="topbar">
+    <div class="dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <div class="address">thea://one-thing-i-need-to-tell-you</div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">a little something i couldn't say out loud</div>
+      <h1>Thea, may sasabihin ako sa'yo.</h1>
+      <p class="sub">
+        Kagabi ko pa 'to pinag-iisipan. I wanted to say it in person,
+        pero feel ko hindi ko rin kaya.
+      </p>
+      <button onclick="openLetter()">open this</button>
+    </section>
+
+    <section id="letter" class="letter">
+      <div class="content">
+        <div class="salutation">Thea Adriene May Jimeno,</div>
+
+        <p>
+          May sasabihin ako sayo, kagabi ko pa 'to pinag-iisipan.
+        </p>
+
+        <p>
+          Lagi naman ako naging honest sayo, yung sasabihin ko ngayon gusto ko sana
+          sa personal sasabihin pero feel ko di ko din kaya.
+        </p>
+
+        <div class="highlight">
+          <strong>I think I’m starting to like you.</strong>
+          <span>okay, sinabi ko na</span>
+        </div>
+
+        <p>
+          Let me explain ha, bakit nasabi kong “I think” and hindi ko diretsong
+          sinasabi na gusto kita.
+        </p>
+
+        <p>
+          At first nung nagkakilala tayo dahil sa budolan ng KMStation wala naman
+          akong intensyon na mapunta sa ganto. Naisip ko nga lang bigla,
+          what if biglang mauto-cancel yang KMStation sa sobrang tagal i-release
+          and instrument lang pala talaga siya para makilala kita hahaha.
+          Sorry, na-overthink ko na kaagad.
+        </p>
+
+        <p>
+          Anw, balik ako sa explanation ko. In years of pagiging magastos,
+          1st time ko makakilala na may makasabayan sa pagiging magastos
+          and dahil dun naisip ko, I want to be friends with you and nothing more.
+        </p>
+
+        <p>
+          Habang tumatagal mas nagiging close tayo, nakakapag-share ng kung ano-ano
+          about life. Through your stories I can see how kind you are, how you set
+          your mind for your goals, but I still don’t know who you really are
+          because I know you’re still not ready to share everything.
+        </p>
+
+        <p>
+          Negative things doesn’t define who you really are. Lahat tayo nagkakamali,
+          may pagkukulang, may problema sa buhay pero di siya yung mga bagay na
+          makakapag-determine ng value mo.
+        </p>
+
+        <p>
+          Alam mo kung ano value mo, ano deserve mo, pero para sa akin we have
+          different definition and standards of how we value a person. A person
+          can value more than how you value yourself. Don’t say you don’t deserve
+          someone because you think you don’t deserve it.
+        </p>
+
+        <p>
+          Sabi mo nga diba di mo alam if worth it pa bang magustuhan dahil sa
+          personality mo, I can confidently say oo, nagugustuhan nga kita eh hahaha.
+        </p>
+
+        <p>
+          Di ko masasabi kailan nagsimula. Kagabi ko lang talaga pinag-isipan and
+          parang napagtanto ko di na normal yung nararamdaman ko na ganto.
+        </p>
+
+        <p>
+          Pero kaya siguro di ko siya kaagad na-realize kasi madami pa akong doubts
+          sa sarili ko. Wala akong doubts sayo, pero sa sarili ko madami.
+        </p>
+
+        <p>
+          Gusto kita pero I think madami pa akong need ayusin sa sarili ko.
+          Natatakot akong magkulang, kaya parang mas gusto ko kung ano tayo ngayon:
+          nagbubudolan sa mga K-pop merch/albums, nagde-deep talks, lalabas pa
+          minsan-minsan.
+        </p>
+
+        <p>
+          Pero alam mo yun, walang expectations sa isa’t isa kasi nga wala namang
+          tayo. Di naman ako nag-a-assume na porket umamin ako irereciprocate mo na
+          HAHAHA.
+        </p>
+
+        <p>
+          Ang sa akin lang, parang masaya ako na wala kang expectation, wala akong
+          expectation compared pag nagka-something na. Kahit sabihin nating,
+          “I can be what I want, you can be what you want,” kahit papaano
+          magkakaroon na yan ng expectation na “bakit kaya ganito, bakit ganyan,
+          kala ko ba gusto niya ako pero ba’t niya magawa ’to para sa akin.”
+        </p>
+
+        <p>
+          Pero di ko kasi alam if nagkaroon, lalo na never naman ako nagkaroon HAHAHA.
+        </p>
+
+        <div class="ending">
+          <div class="heart">♡</div>
+          <p>
+            At the end of the day, nasa’yo ang final decision. If ayaw mo na ako
+            kausapin kasi na-break ko na kaagad yung promise na ayaw mong
+            nagkakaroon ng something sa kaibigan, okay lang. Gets ko naman.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="note">made with a little courage, overthinking, and probably too much honesty.</div>
+  </main>
+
+  <div class="footer">close the tab whenever you're ready ♡</div>
+</div>
+
+<script>
+function openLetter() {
+  const letter = document.getElementById('letter');
+  letter.classList.add('show');
+  setTimeout(() => {
+    letter.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+</script>
+</body>
+</html>
